@@ -41,7 +41,7 @@ def check_names(key, kind):
            Either 'authors' or 'committers'. Should be consistent with the key argument.
     """
     # Get a list of authors/committer names for every commit.
-    command = ['git', 'log', '--format=%%%sN <%%%sE>' % (key, key)]
+    command = ['git', 'log', '--format=%%%sN <%%%sE>' % (key, key), '--no-merges']
     names = subprocess.check_output(command).split('\n')[:-1]
 
     # Turn that list into a set to remove duplicates.
