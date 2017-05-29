@@ -278,6 +278,7 @@ class TrapdoorProgram(object):
             del config['trapdoor_pylint_config']
 
         counter, messages = self.get_stats(config, args)
+        _print_messages('MESSAGES :', messages, pattern=None)
         print('NUMBER OF MESSAGES :', len(messages))
         print('ADDING SOURCE ...')
         self._add_contexts(messages)
