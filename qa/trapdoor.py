@@ -119,6 +119,8 @@ class Message(object):
             return self < other
         tup_self = (self._filename, self._lineno, self._charno, self._text, self._context)
         tup_other = (other._filename, other._lineno, other._charno, other._text, other._context)
+        tup_self = tuple(-1 if i is None else i for i in tup_self)
+        tup_other = tuple(-1 if i is None else i for i in tup_other)
         return tup_self < tup_other
 
     def add_context(self, context):
