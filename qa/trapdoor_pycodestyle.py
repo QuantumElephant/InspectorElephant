@@ -55,6 +55,8 @@ class PyCodeStyleTrapdoorProgram(TrapdoorProgram):
                         os.path.join(self.qaworkdir, config['default_config_file']))
 
             for custom_config in config['custom'].values():
+                if custom_config['config_file'] == '':
+                    continue
                 shutil.copy(os.path.join(qatooldir, custom_config['config_file']),
                             os.path.join(self.qaworkdir, custom_config['config_file']))
 
