@@ -86,7 +86,7 @@ class PylintTrapdoorProgram(TrapdoorProgram):
 
         # get Pylint version
         command = ['pylint', '--version', '--rcfile={0}'.format(default_rc_file)]
-        version_info = b''.join(run_command(command, verbose=False)[0].split(b'\n')[:2])
+        version_info = ''.join(run_command(command, verbose=False)[0].split('\n')[:2])
         print('USING              :', version_info)
 
         # Collect python files (pylint ignore is quite bad.. need to ignore manually)
@@ -142,7 +142,7 @@ class PylintTrapdoorProgram(TrapdoorProgram):
                                   py_files +
                                   ['--rcfile={0}'.format(rc_file),
                                    '-j 2', ],
-                                  has_failed=has_failed)[0].decode('utf-8')
+                                  has_failed=has_failed)[0]
             # exclude directories/files
             exclude_files.extend(py_files)
         # get files that have not been run
@@ -154,7 +154,7 @@ class PylintTrapdoorProgram(TrapdoorProgram):
                               py_files +
                               ['--rcfile={0}'.format(default_rc_file),
                                '-j 2', ],
-                              has_failed=has_failed)[0].decode('utf-8')
+                              has_failed=has_failed)[0]
 
         # parse the output of Pylint into standard return values
         lines = output.split('\n')[:-1]
