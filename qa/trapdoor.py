@@ -282,7 +282,7 @@ class TrapdoorProgram(object):
         print('ADDING SOURCE ...')
         self._add_contexts(messages)
         print('NUMBER OF MESSAGES :', len(messages))
-        print('SUM OF COUNTERS    :', sum(counter.itervalues()))
+        print('SUM OF COUNTERS    :', sum(counter.values()))
         fn_pp = 'trapdoor_results_%s_%s.pp' % (self.name, args.mode)
         with open(os.path.join(self.qaworkdir, fn_pp), 'w') as f:
             cPickle.dump((counter, messages), f)
@@ -329,7 +329,7 @@ class TrapdoorProgram(object):
                 l = mdict.setdefault(message.filename, [])
                 bisect.insort(l, message)
         # 2) Loop over all files and collect some source context for each message
-        for filename, file_messages in mdict.iteritems():
+        for filename, file_messages in mdict.items():
             # case insensitive search for filename
             try:
                 dir_name = os.path.dirname(filename)
@@ -402,7 +402,7 @@ class TrapdoorProgram(object):
         resolved_counter = counter_ancestor - counter_feature
         if len(resolved_counter) > 0:
             print('SOME COUNTERS DECREASED')
-            for key, counter in resolved_counter.iteritems():
+            for key, counter in resolved_counter.items():
                 print('%s  |  %+6i' % (key, -counter))
 
     def check_regression(self, counter_feature_messages_feature,
@@ -434,7 +434,7 @@ class TrapdoorProgram(object):
         new_counter = counter_feature - counter_ancestor
         if len(new_counter) > 0:
             print('SOME COUNTERS INCREASED')
-            for key, counter in new_counter.iteritems():
+            for key, counter in new_counter.items():
                 print('%s  |  %+6i' % (key, counter))
             sys.exit(1)
         else:
