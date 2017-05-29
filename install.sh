@@ -2,6 +2,6 @@
 
 cd ${BASH_SOURCE%/*}
 
-cp .gitignore ../
+cp -a .gitignore ../
 cp -a pre-commit ../.git/hooks/
 cp -a cleanfiles.sh ../
