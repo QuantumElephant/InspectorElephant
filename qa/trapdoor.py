@@ -284,7 +284,7 @@ class TrapdoorProgram(object):
         print('NUMBER OF MESSAGES :', len(messages))
         print('SUM OF COUNTERS    :', sum(counter.values()))
         fn_pp = 'trapdoor_results_%s_%s.pp' % (self.name, args.mode)
-        with open(os.path.join(self.qaworkdir, fn_pp), 'w') as f:
+        with open(os.path.join(self.qaworkdir, fn_pp), 'wb') as f:
             cPickle.dump((counter, messages), f)
         print('WALL TIME          : %.1f' % (time.time() - start_time))
 
@@ -537,10 +537,10 @@ def run_command(command, verbose=True, cwd=None, has_failed=None):
     if has_failed(proc.returncode, stdout, stderr):
         print('STDOUT')
         print('------')
-        print(stdout)
+        print(stdout.decode('utf-8'))
         print('STDERR')
         print('------')
-        print(stderr)
+        print(stderr.decode('utf-8'))
         raise RuntimeError('Subprocess returned non-zero exit status %i' % proc.returncode)
     else:
         return stdout, stderr

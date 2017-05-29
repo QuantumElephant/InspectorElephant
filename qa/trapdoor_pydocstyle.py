@@ -34,7 +34,7 @@ from trapdoor import TrapdoorProgram, Message, get_source_filenames, run_command
 
 def has_failed(returncode, stdout, stderr):
     """Determine if pydocstyle has failed."""
-    return stderr.startswith('Usage:') or stderr.startswith('[Errno')
+    return stderr.startswith(b'Usage:') or stderr.startswith(b'[Errno')
 
 
 class PyDocStyleTrapdoorProgram(TrapdoorProgram):
@@ -83,14 +83,14 @@ class PyDocStyleTrapdoorProgram(TrapdoorProgram):
                                    '--add-ignore={0}'.format(ignore)] +
                                   config['py_packages'] +
                                   get_source_filenames(config, 'py', unpackaged_only=True),
-                                  has_failed=has_failed)[1]
+                                  has_failed=has_failed)[1].decode('utf-8')
         # run trapdoor with default configuration on all the files that have not been tested yet
         output += run_command(['pydocstyle',
                                '--match={0}'.format(default_match),
                                '--add-ignore={0}'.format(config['default_ignore'])] +
                               config['py_packages'] +
                               get_source_filenames(config, 'py', unpackaged_only=True),
-                              has_failed=has_failed)[1]
+                              has_failed=has_failed)[1].decode('utf-8')
 
         # Parse the standard output of pydocstyle
         counter = Counter()
