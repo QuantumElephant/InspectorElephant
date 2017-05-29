@@ -240,7 +240,7 @@ def make_temporary_merge(repo, merge_head_name):
     repo.index.merge_tree(repo.heads.master, base=merge_base)
     log('Check if merge went well.')
     unmerged_blobs = repo.index.unmerged_blobs()
-    for _path, list_of_blobs in unmerged_blobs.iteritems():
+    for _path, list_of_blobs in unmerged_blobs.items():
         for (stage, _blob) in list_of_blobs:
             # Now we can check each stage to see whether there were any conflicts
             if stage != 0:
