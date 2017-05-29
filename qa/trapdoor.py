@@ -537,10 +537,10 @@ def run_command(command, verbose=True, cwd=None, has_failed=None):
     if has_failed(proc.returncode, stdout, stderr):
         print('STDOUT')
         print('------')
-        print(stdout)
+        print(stdout.decode('utf-8'))
         print('STDERR')
         print('------')
-        print(stderr)
+        print(stderr.decode('utf-8'))
         raise RuntimeError('Subprocess returned non-zero exit status %i' % proc.returncode)
     else:
         return stdout, stderr
