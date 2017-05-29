@@ -58,7 +58,7 @@ class PylintTrapdoorProgram(TrapdoorProgram):
                         os.path.join(self.qaworkdir, config['default_rc']))
 
             for custom_config in config['custom'].values():
-                if custom_config['config_file'] == '':
+                if custom_config['rc'] == '':
                     continue
                 shutil.copy(os.path.join(qatooldir, custom_config['rc']),
                             os.path.join(self.qaworkdir, custom_config['rc']))
