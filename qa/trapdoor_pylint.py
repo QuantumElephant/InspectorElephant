@@ -27,6 +27,7 @@ This test calls the pylint program, see http://docs.pylint.org/index.html.
 import os
 import shutil
 from collections import Counter
+import json
 
 from trapdoor import TrapdoorProgram, Message, get_source_filenames, run_command
 
