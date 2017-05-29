@@ -49,6 +49,16 @@ class PylintTrapdoorProgram(TrapdoorProgram):
         This includes a copy of tools/qa/pylintrc to QAWORKDIR.
         """
         TrapdoorProgram.prepare(self)
+        # copy rc files
+        qatooldir = os.path.dirname(os.path.abspath(__file__))
+        with open(self.trapdoor_config_file, 'r') as f:
+            config = json.load(f)['trapdoor_pylint_config']
+            shutil.copy(os.path.join(qatooldir, config['default_rc']),
+                        os.path.join(self.qaworkdir, config['default_rc']))
+
+            for custom_config in config['custom'].values():
+                shutil.copy(os.path.join(qatooldir, custom_config['rc']),
+                            os.path.join(self.qaworkdir, custom_config['rc']))
 
     def get_stats(self, config, args):
         """Run tests using Pylint.
@@ -70,8 +80,6 @@ class PylintTrapdoorProgram(TrapdoorProgram):
         # get default rcfile
         qatooldir = os.path.dirname(os.path.abspath(__file__))
         default_rc_file = os.path.join(self.qaworkdir, config['default_rc'])
-        # FIXME: not too sure if this should be in prepare
-        shutil.copy(os.path.join(qatooldir, os.path.basename(default_rc_file)), default_rc_file)
 
         # get Pylint version
         command = ['pylint', '--version', '--rcfile={0}'.format(default_rc_file)]
@@ -95,7 +103,7 @@ class PylintTrapdoorProgram(TrapdoorProgram):
 
             Returns
             -------
-            list of files as a relative path
+            list of files in absolute path
             """
             output = []
             if os.path.isfile(file_or_dir) and file_or_dir not in exclude:
