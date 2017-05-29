@@ -17,17 +17,17 @@ rm -rf *_pr.tar.gz *_ancestor.tar.gz
 export PYTHONPATH=$PWD
 
 echo "--- Unpack PR build from previous step"
-buildkite-agent artifact download packagename_pr.tar.gz .
-tar xvf packagename_pr.tar.gz
+buildkite-agent artifact download wfns_pr.tar.gz .
+tar xvf wfns_pr.tar.gz
 
 echo "--- Running Nosetests"
-nosetests -v --processes=2 --process-timeout=60 -a slow packagename
+nosetests -v --processes=2 --process-timeout=60 -a slow wfns
 
 ## Don't touch this code if you don't understand it ##
 if [ "$BUILDKITE_PULL_REQUEST" = "false" ]; then
 ## END ##
 
-  nosetests -v --processes=2 --process-timeout=60 -a "!slow" packagename
+  nosetests -v --processes=2 --process-timeout=60 -a "!slow" wfns
 
 ## Don't touch this code if you don't understand it ##
 fi

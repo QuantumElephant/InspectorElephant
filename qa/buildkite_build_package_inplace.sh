@@ -23,8 +23,8 @@ echo "--- Build Package"
 CC="ccache gcc" ./setup.py build_ext -i
 
 echo "--- Packing build"
-find packagename -name "*.so" -o -name "*.pyc" | tar -zcvf packagename_pr.tar.gz -T -
-buildkite-agent artifact upload packagename_pr.tar.gz
+find wfns -name "*.so" -o -name "*.pyc" | tar -zcvf wfns_pr.tar.gz -T -
+buildkite-agent artifact upload wfns_pr.tar.gz
 
 ## Don't touch this code if you don't understand it ##
 if [ "$BUILDKITE_PULL_REQUEST" != "false" ]; then
@@ -37,8 +37,8 @@ if [ "$BUILDKITE_PULL_REQUEST" != "false" ]; then
     CC="ccache gcc" ./setup.py build_ext -i
 
     echo "--- Packing build [Ancestor]"
-    find packagename -name "*.so" -o -name "*.pyc" | tar -zcvf packagename_ancestor.tar.gz -T -
-    buildkite-agent artifact upload packagename_ancestor.tar.gz
+    find wfns -name "*.so" -o -name "*.pyc" | tar -zcvf wfns_ancestor.tar.gz -T -
+    buildkite-agent artifact upload wfns_ancestor.tar.gz
 
 ## Don't touch this code if you don't understand it ##
 fi

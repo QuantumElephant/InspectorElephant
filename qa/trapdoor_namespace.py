@@ -77,8 +77,8 @@ class NamespaceTrapdoorProgram(TrapdoorProgram):
 
             # Skip if this modulename is not part of a package
             in_package = False
-            for packagename in config['py_packages']:
-                if modulename.startswith(packagename):
+            for wfns in config['py_packages']:
+                if modulename.startswith(wfns):
                     in_package = True
                     break
             if not in_package:

@@ -24,8 +24,8 @@ if [ "$BUILDKITE_PULL_REQUEST" != "false" ]; then
     ./cleanfiles.sh
 
     echo "--- Unpack PR build from previous step"
-    buildkite-agent artifact download packagename_pr.tar.gz .
-    tar xvf packagename_pr.tar.gz
+    buildkite-agent artifact download wfns_pr.tar.gz .
+    tar xvf wfns_pr.tar.gz
 
     echo "--- Running trapdoors tests on PR branch"
     rm -rf ${QAWORKDIR}/*.pp
@@ -33,9 +33,9 @@ if [ "$BUILDKITE_PULL_REQUEST" != "false" ]; then
 
     echo "--- Unpack ancestor build from previous step"
     git checkout ${ANCESTOR_SHA}
-    buildkite-agent artifact download packagename_ancestor.tar.gz .
+    buildkite-agent artifact download wfns_ancestor.tar.gz .
     ./cleanfiles.sh
-    tar xvf packagename_ancestor.tar.gz
+    tar xvf wfns_ancestor.tar.gz
 
     echo "--- Running trapdoor tests on ancestor branch"
     copy_qa_scripts
