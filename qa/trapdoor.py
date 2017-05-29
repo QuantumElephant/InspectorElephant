@@ -544,4 +544,4 @@ def run_command(command, verbose=True, cwd=None, has_failed=None):
         print(stderr.decode('utf-8'))
         raise RuntimeError('Subprocess returned non-zero exit status %i' % proc.returncode)
     else:
-        return stdout, stderr
+        return stdout.decode('utf-8'), stderr.decode('utf-8')

@@ -83,14 +83,14 @@ class PyDocStyleTrapdoorProgram(TrapdoorProgram):
                                    '--add-ignore={0}'.format(ignore)] +
                                   config['py_packages'] +
                                   get_source_filenames(config, 'py', unpackaged_only=True),
-                                  has_failed=has_failed)[1].decode('utf-8')
+                                  has_failed=has_failed)[1]
         # run trapdoor with default configuration on all the files that have not been tested yet
         output += run_command(['pydocstyle',
                                '--match={0}'.format(default_match),
                                '--add-ignore={0}'.format(config['default_ignore'])] +
                               config['py_packages'] +
                               get_source_filenames(config, 'py', unpackaged_only=True),
-                              has_failed=has_failed)[1].decode('utf-8')
+                              has_failed=has_failed)[1]
 
         # Parse the standard output of pydocstyle
         counter = Counter()
