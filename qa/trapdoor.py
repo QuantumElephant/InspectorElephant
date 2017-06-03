@@ -326,8 +326,8 @@ class TrapdoorProgram(object):
         mdict = {}
         for message in all_messages:
             if message.filename is not None and message.lineno is not None:
-                l = mdict.setdefault(message.filename, [])
-                bisect.insort(l, message)
+                val = mdict.setdefault(message.filename, [])
+                bisect.insort(val, message)
         # 2) Loop over all files and collect some source context for each message
         for filename, file_messages in mdict.iteritems():
             # case insensitive search for filename
