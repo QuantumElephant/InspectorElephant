@@ -39,7 +39,7 @@ def parse_args():
     if args.ancestor is None:
         # The default is to use the merge base.
         command = ['git', 'merge-base', 'master', 'HEAD']
-        return subprocess.check_output(command).strip()
+        return subprocess.check_output(command).decode('utf-8').strip()
     else:
         return args.ancestor
 
@@ -52,7 +52,7 @@ def main():
     # Get the list of commit ids and descriptions between the current and master branch.
     # The latest one is printed first and the HEAD of the master branch is included
     command = ['git', 'log', '%s^..HEAD' % ancestor, '--pretty=oneline', '--color=never']
-    commits_str = subprocess.check_output(command)
+    commits_str = subprocess.check_output(command).decode('utf-8')
 
     # Parse the output
     commits = []
