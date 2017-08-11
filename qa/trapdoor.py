@@ -26,10 +26,12 @@ This model provides the ``TrapdoorProgram`` base class for all trapdoor programs
 
 import argparse
 import bisect
-# for python2
-# import cPickle
-# for python3
-import _pickle as cPickle
+try:
+    # for python3
+    import _pickle as cPickle
+except ImportError:
+    # for python2
+    import cPickle
 from fnmatch import fnmatch
 import json
 import os
